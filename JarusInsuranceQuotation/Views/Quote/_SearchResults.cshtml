@@ -1,0 +1,26 @@
+﻿@model JarusInsuranceQuotation.Models.SearchResults
+@if (Model.Persons == null || Model.Persons.Count == 0)
+{
+    <div>Results not found.</div>
+}
+else
+{
+    <div class="table-header">
+        <div class="col-sm-12">
+            <div class="col-sm-5"><label>Name</label></div>
+            <div class="col-sm-3"><label>DoB</label></div>
+            <div class="col-sm-3"><label>Add to quote</label></div>
+        </div>
+    </div>
+    @foreach (var person in Model.Persons)
+    {
+
+        <div class="row margin-top-bottom">
+            <div class="col-sm-12">
+                <div class="col-sm-5">@person.FullName</div>
+                <div class="col-sm-3">@person.DateOfBirth.ToShortDateString()</div>
+                <div class="col-sm-3"><input type="button" id="@person.PersonId" value="Select" class="btn-select" /></div>
+            </div>
+        </div>
+    }
+}

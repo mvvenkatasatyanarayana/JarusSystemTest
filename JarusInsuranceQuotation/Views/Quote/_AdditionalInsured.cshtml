@@ -1,0 +1,29 @@
+﻿@model JarusInsuranceQuotation.Models.AdditionalInsuredResult
+<div class="row">
+    @foreach (var additionalInsured in @Model.AdditionalInsuredList)
+    {
+        <div class="section-half">
+            <div class="section-header">Additional Insured</div>
+            <div class="">
+                <div class="search">
+                    <label>First Name</label>
+                    <div><input type="text" disabled value="@additionalInsured.Person.FirstName" /></div>
+                </div>
+
+                <div class="search">
+                    <label>Date Of Birth</label>
+                    <div><input type="text" disabled value="@additionalInsured.Person.DateOfBirth.ToShortDateString()" /></div>
+                </div>
+
+                <div class="search">
+                    <label>Coverage</label>
+                    <div><input type="text" disabled value="@additionalInsured.Coverage" /></div>
+                </div>
+
+                <div class="search">
+                    <input type="button" id="@additionalInsured.Person.PersonId" class="btn-delete" value="Delete" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

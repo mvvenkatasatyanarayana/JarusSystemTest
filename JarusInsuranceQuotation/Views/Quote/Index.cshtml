@@ -1,0 +1,101 @@
+﻿@model JarusInsuranceQuotation.Api.Data.Quote
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/quote.js"></script>
+
+<input type="hidden" id="searchUrl" value="@Url.Action("FindPeople")" />
+<div class="container">
+
+    @*Section 1*@
+    <div class="section">
+        <div class="section-header">Quote</div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <div class="col-sm-6 right-align">
+                        Quote
+                    </div>
+                    <div class="col-sm-6">
+                        <label>@Model.QuoteId</label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-6 right-align">
+                        Status
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(_ => _.StatusId, (Model.Statuses.Select(s => new SelectListItem() { Text = s.Description, Value = s.StatusId.ToString() })))
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="col-sm-6 right-align">
+                        Applicant
+                    </div>
+                    <div class="col-sm-6">
+                        <label>@Model.Applicant</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <div class="col-sm-6 right-align">
+                        Quote Date
+                    </div>
+                    <div class="col-sm-6">
+                        <label>@Model.QuoteDate.ToShortDateString()</label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="col-sm-6 right-align">
+                        Effective Date
+                    </div>
+                    <div class="col-sm-6">
+                        <label>@Model.EffectiveDate.ToShortDateString()</label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <input type="radio" name="instype" checked="checked" />
+                    <span>Basic</span>
+                    <label>@Model.Basic</label>
+
+                    <input type="radio" name="instype" />
+                    <span>Preffered</span>
+                    <label>@Model.Preffered</label>
+
+                    <input type="radio"  name="instype"/>
+                    <span>Premier</span>
+                    <label>@Model.Premier</label>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Section 2*@
+    <div class="section">
+        <div class="section-header">Search</div>
+        <div class="row">
+            <div class="col-sm-4 search">
+                <label>First Name</label>
+                <div><input type="text" id="searchFirstName" /></div>
+            </div>
+
+            <div class="col-sm-4 search">
+                <label>Last Name</label>
+                <div><input type="text" id="searchLastName" /></div>
+            </div>
+            <div class="col-sm-3 search">
+                <input type="button" class="btn-search" value="Search" />
+            </div>
+        </div>
+        <div id="_SearchResults"></div>
+    </div>
+
+    @*Section 3*@
+    <div id="_AdditionalInsuredResults"></div>
+</div>
